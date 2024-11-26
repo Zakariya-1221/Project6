@@ -1,0 +1,25 @@
+<h1><%= @presentation.title %></h1>
+<p><%= @presentation.description %></p>
+
+<h2>Feedback</h2>
+<%= form_with(model: [ @presentation, @presentation.feedbacks.build ], local: true) do |form| %>
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content %>
+  </div>
+  <div class="field">
+    <%= form.label :rating %>
+    <%= form.number_field :rating %>
+  </div>
+  <div class="actions">
+    <%= form.submit "Submit Feedback" %>
+  </div>
+<% end %>
+
+<h3>All Feedback</h3>
+<% @presentation.feedbacks.each do |feedback| %>
+  <p><strong>Rating:</strong> <%= feedback.rating %></p>
+  <p><%= feedback.content %></p>
+<% end %>
+
+<%= link_to 'Delete', presentation_path(@presentation), data: { "turbo-method": :delete, turbo_confirm: "Are you sure?" } %>
