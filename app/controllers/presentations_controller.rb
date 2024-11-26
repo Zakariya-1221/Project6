@@ -5,11 +5,12 @@ class PresentationsController < ApplicationController
 
   def show
     @presentation = Presentation.find_by_id(params[:id])
-    @feedbacks = @presentation.feedbacks
     #debugger
-    if @user.nil?
-      flash[:alert] = "User not found"
-      redirect_to users_path
+    if @presentation.nil?
+      flash[:alert] = "Presentation not found"
+      redirect_to presentations_path
+    else
+      @feedbacks = @presentation.feedbacks
     end
   end
 
@@ -20,7 +21,7 @@ class PresentationsController < ApplicationController
   def create
     @presentation = Presentation.new(presentation_params)
     if @presentation.save
-      flash[:success] = "Presentation created"
+      flash[:success] = "Presentation successfully created"
       redirect_to presentation_path(@presentation), notice: "Presentation created"
     else
       render 'new', status: :unprocessable_entity
@@ -48,6 +49,6 @@ class PresentationsController < ApplicationController
 
   private
   def presentation_params
-    params.require(:presentation).permit(:title, :description)
+    params.require(:presentation).permit(:title, :description, :date, :time, :presenter_id)
   end
 end
