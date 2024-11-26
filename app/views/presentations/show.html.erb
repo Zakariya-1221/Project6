@@ -1,0 +1,8 @@
+<%= @presentation.title %>
+<%= @presentation.description %>
+
+<h3>Feedback</h3>
+<% @feedbacks.each do |feedback| %>
+  Score: <%= feedback.score %>
+  Comment: <%= feedback.comment %>
+<%end %>

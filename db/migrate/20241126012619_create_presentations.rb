@@ -5,10 +5,10 @@ class CreatePresentations < ActiveRecord::Migration[7.2]
       t.string :description
       t.date :date
       t.time :time
-      t.integer :presenterID, null: false
+      t.integer :presenter_id, null: false
 
       t.timestamps
     end
-    add_foreign_key :presentations, :users, column: :presenterID
+    add_foreign_key :presentations, :users, column: :presenter_id
   end
 end
