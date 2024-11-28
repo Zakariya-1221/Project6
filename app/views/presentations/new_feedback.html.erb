@@ -1,0 +1,23 @@
+<h1>Submit Feedback for <%= @presentation.title %></h1>
+<p><%= @presentation.description %></p>
+
+<h2>Feedback</h2>
+<%= form_with(model: [ @presentation, @presentation.feedbacks.build ], local: true) do |form| %>
+    <div class="field">
+        <%= from.labe :user_id, "Select Presenter" %>
+        <%= form.collection_select :presenter_id, User.where(role: 'user'), :id, :name, prompt: "Choose a presenter to rate"  %>
+    </div>
+    <div class="field">
+      <%= form.label :content %>
+      <%= form.text_area :content %>
+    </div>
+    <div class="field">
+      <%= form.label :rating %>
+      <%= form.number_field :rating %>
+    </div>
+    <div class="actions">
+      <%= form.submit "Submit Feedback" %>
+    </div>
+<% end %>
+
+<%= link_to 'Delete', presentation_path(@presentation), data: { "turbo-method": :delete, turbo_confirm: "Are you sure?" } %>

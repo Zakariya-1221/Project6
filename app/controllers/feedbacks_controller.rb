@@ -1,38 +1,55 @@
 class FeedbacksController < ApplicationController
-    def new
-        @feedback = Feedback.new
-    end
+   before_action :set_presentation
+   before_action :authorize_user, only: [ :create ]  # Ensure only appropriate users can submit feedback
 
-    def create
-        @presentation = Presentation.find(params[:presentation_id])
-        @feedback = @presentation.feedbacks.build(feedback_params)
-        if @feedback.save
-          redirect_to @presentation, notice: 'Feedback was successfully created.'
+    def new
+        if current_user == @presentation.presenter
+            # if the current user is the presenter, redirect_to feedback summary
+            redirect_to @presentation, alert: "You do not have permission to submit feedback."
         else
-          redirect_to @presentation, alert: 'Failed to create feedback.'
+            # if non-presenter, show feedback submission form
+            @feedback = @presentation.feedbacks.build
         end
     end
-    
 
-    def show
-        @presentation = Presentation.find(params[:presentation_id])
-        @feedbacks = @presentation.feedbacks
+    # Non-presenters can submit feedback
+    def create
+      @feedback = @presentation.feedbacks.build(feedback_params)
+      @feedback.user = current_user  # Assuming the current user is submitting feedback
+
+      if @feedback.save
+        redirect_to @presentation, notice: "Feedback successfully submitted."
+      else
+        render "new", alert: "Error submitting feedback."
       end
-
-    def index
-        @presentation = Presentation.find(params[:presentation_id])
-        @feedbacks = @presentation.feedbacks
     end
 
-    def destroy
-        @feedback = Feedback.find(params[:id])
-        @feedback.destroy
-        redirect_to feedbacks_path, notice: "Feedback deleted!"
+    # Presenters can view all feedback
+    def show_feedbacks
+      # Check if the current user is the presenter for the presentation
+      if current_user == @presentation.presenter
+        @feedbacks = @presentation.feedbacks
+        @average_rating = @feedbacks.average(:rating)
+        @final_score = @presentation.final_score
+      else
+        redirect_to root_path, alert: "You do not have permission to view this feedback."
+      end
     end
 
     private
-    
+
+    def set_presentation
+      @presentation = Presentation.find(params[:presentation_id])
+    end
+
     def feedback_params
-        params.require(:feedback).permit(:content, :rating)
+      params.require(:feedback).permit(:content, :rating, :presenter_id)
+    end
+
+    def authorize_user
+      # For feedback creation, we can allow anyone (except presenters) to submit feedback
+      unless current_user.role == "student" || current_user.role == "ta" || current_user.role == "teacher"
+        redirect_to root_path, alert: "You do not have permission to submit feedback."
+      end
     end
 end

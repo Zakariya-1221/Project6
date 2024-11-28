@@ -25,18 +25,24 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_25_204723) do
   create_table "presentations", force: :cascade do |t|
     t.string "title"
     t.string "description"
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_presentations_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
+    t.integer "role_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password"
+    t.index ["role_id"], name: "index_users_on_role_id"
   end
 
   add_foreign_key "feedbacks", "presentations"
   add_foreign_key "feedbacks", "users"
+  add_foreign_key "presentations", "users"
+  add_foreign_key "users", "roles"
 end

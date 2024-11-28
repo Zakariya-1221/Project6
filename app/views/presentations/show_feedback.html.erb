@@ -1,0 +1,15 @@
+<h1>Feedback for your Presentation<%= @presentation.title %></h1>
+<p><%= @presentation.description %></p>
+
+<h2>Average Rating: <%= @average_rating%> </h2>
+<h3>Final Score: <%= @final_score %> </h3>
+
+<h3>All Feedback</h3>
+<% @feedbacks.each do |feedback| %>
+  <div class="feedback">
+    <p><strong>Rating:</strong> <%= feedback.rating %></p>
+    <p><%= feedback.content %></p>
+    <p><small>Submitted by: <%= feedback.user.name %></small></p>
+  </div>
+<% end %>
+<%= link_to 'Back to Presentation', @presentation %>
