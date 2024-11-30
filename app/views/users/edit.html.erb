@@ -1,30 +1,21 @@
-<h1>Edit User</h1>
-
-<%= form_with(model: @user, local: true) do |form| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-      <ul>
-        <% @user.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit "Update User" %>
-  </div>
+<h1>Update User</h1>
+<%= render 'shared/error_messages' %>
+<%= form_with(model: @user, url: user_path(@user), method: :patch) do |form| %>
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+       <br>
+       <br>
+      <%= form.label :email %>
+      <%= form.email_field :email %>
+       <br>
+       <br>
+      <%= form.label :password %>
+      <%= form.password_field :password %>
+        <br>
+        <br>
+      <%= form.label :password_confirmation, "Confirmation" %>
+      <%= form.password_field :password_confirmation %>
+        <br>
+        <br>
+    <%= form.submit 'Update User' %>
 <% end %>
-
-<%= link_to 'Back', users_path %>

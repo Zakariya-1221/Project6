@@ -1,5 +1,6 @@
+<!-- Only admin can do it -->
 <h1>New Presentation</h1>
-<%= form_with model: @presentation, local: true do |form| %>
+<%= form_with(model: @presentation) do |form| %>
   <%= form.label :title %>
   <%= form.text_field :title %>
   <br><br>

@@ -1,0 +1,21 @@
+<h1>Feedback Management</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Presentation</th>
+      <th>Evaluator</th>
+      <th>Score</th>
+      <th>Comments</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @feedbacks.each do |feedback| %>
+      <tr>
+        <td><%= feedback.presentation.title %></td>
+        <td><%= User.find(feedback.user_id).name %></td>
+        <td><%= feedback.score %></td>
+        <td><%= feedback.comments %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

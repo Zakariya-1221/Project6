@@ -1,4 +1,29 @@
+<!-- Admin only-->
 <h1>All Users</h1>
-<% @users.each do |user| %>
-    <h2><%= link_to user.name, user_path(user) %></h2>
-<% end %>
+<%provide(:title, 'User Index Page')%>
+
+<table>
+    <thead>
+        <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @users.each do |user|%>
+            <tr>
+                <td><%= user.id %></td>
+                <td><%= user.name %></td>
+                <td><%= user.email %></td>
+                <td>
+                    <%= link_to 'Edit', edit_user_path(user) %> |
+                    <%= form_with model: user, method: :delete do |form| %>
+                        <%= form.submit 'Delete' %>
+                    <% end %>
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>

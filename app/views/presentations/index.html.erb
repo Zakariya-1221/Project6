@@ -1,5 +1,24 @@
 <h1>All Presentations</h1>
-<% @presentations.each do |presentation| %>
-  <h2><%= link_to presentation.title, presentation_path(presentation) %></h2>
-  <p><%= presentation.description %></p>
-<% end %>
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Presenter</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @presentations.each do |presentation| %>
+      <tr>
+        <td><%= presentation.title %></td>
+        <td><%= presentation.presenter.name %></td>
+        <td>
+          <%= link_to 'View', presentation_path(presentation) %> |
+          <% if current_user != presentation.presenter %>
+            <%= link_to 'Evaluate', new_feedback_presentation_path(presentation) %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

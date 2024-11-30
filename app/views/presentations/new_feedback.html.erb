@@ -1,23 +1,20 @@
-<h1>Submit Feedback for <%= @presentation.title %></h1>
-<p><%= @presentation.description %></p>
+<h1>Leave Feedback</h1>
 
-<h2>Feedback</h2>
-<%= form_with(model: [ @presentation, @presentation.feedbacks.build ], local: true) do |form| %>
-    <div class="field">
-        <%= from.labe :user_id, "Select Presenter" %>
-        <%= form.collection_select :presenter_id, User.where(role: 'user'), :id, :name, prompt: "Choose a presenter to rate"  %>
-    </div>
-    <div class="field">
-      <%= form.label :content %>
-      <%= form.text_area :content %>
-    </div>
-    <div class="field">
-      <%= form.label :rating %>
-      <%= form.number_field :rating %>
-    </div>
-    <div class="actions">
-      <%= form.submit "Submit Feedback" %>
-    </div>
+<%= form_with(model: @feedback, url: feedbacks_path, local: true) do |form| %>
+  <div>
+    <%= form.label :presentation_id, "Select Presenter" %>
+    <%= form.collection_select :presentation_id, @presentations, :id, :title, prompt: "Select a presentation" %>
+  </div>
+
+  <div>
+    <%= form.label :score %>
+    <%= form.number_field :score, min: 1, max: 5 %> <!-- Example score range from 1 to 5 -->
+  </div>
+
+  <div>
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <%= form.submit "Submit Feedback" %>
 <% end %>
-
-<%= link_to 'Delete', presentation_path(@presentation), data: { "turbo-method": :delete, turbo_confirm: "Are you sure?" } %>

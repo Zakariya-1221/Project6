@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update]
+  before_action :set_user, only: [ :show, :edit, :update ]
 
   def new
     @user = User.new
@@ -12,7 +12,7 @@ class UsersController < ApplicationController
       redirect_to user_path(@user), notice: "User created!"
     else
       flash[:alert] = "There was an error creating the user."
-      render 'new', status: :unprocessable_entity
+      render :new
     end
   end
 
@@ -21,6 +21,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = User.find_by(id: params[:id])
     if @user.nil?
       flash[:alert] = "User not found!"
       redirect_to users_path
@@ -53,7 +54,7 @@ class UsersController < ApplicationController
       redirect_to user_path(@user), notice: "User updated!"
     else
       flash[:alert] = "There was an error updating the user."
-      render 'edit', status: :unprocessable_entity
+      render "edit", status: :unprocessable_entity
     end
   end
 
@@ -68,6 +69,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :email, :password)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :role_id)
   end
 end

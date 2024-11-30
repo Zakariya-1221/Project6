@@ -1,0 +1,48 @@
+<h1>Manage Presentations</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Presenter</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @presentations.each do |presentation| %>
+      <tr>
+        <td><%= presentation.title %></td>
+        <td><%= presentation.description %></td>
+        <td><%= presentation.date %></td>
+        <td><%= presentation.time %></td>
+        <td><%= User.find(presentation.presenter_id).name %></td>
+        <td>
+          <%= link_to 'Edit', edit_presentation_path(presentation.id) %> |
+          <%= link_to 'Delete', delete_presentation_path(presentation.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h2>Create New Presentation</h2>
+<%= form_with(url: admin_create_presentation_path, method: :post) do |form| %>
+  <%= form.label :title %>
+  <%= form.text_field :title %><br>
+
+  <%= form.label :description %>
+  <%= form.text_area :description %><br>
+
+  <%= form.label :date %>
+  <%= form.date_field :date %><br>
+
+  <%= form.label :time %>
+  <%= form.time_field :time %><br>
+
+  <%= form.label :presenter_id %>
+  <%= form.select :presenter_id, User.where(role_id: Role.find_by(roleName: 'student').id).pluck(:name, :id) %><br>
+
+  <%= form.submit 'Create Presentation' %>
+<% end %>

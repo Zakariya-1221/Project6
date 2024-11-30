@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_25_204723) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_30_021920) do
   create_table "feedbacks", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "presentation_id", null: false
@@ -31,6 +31,12 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_25_204723) do
     t.index ["user_id"], name: "index_presentations_on_user_id"
   end
 
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -38,6 +44,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_25_204723) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password"
+    t.string "password_digest"
     t.index ["role_id"], name: "index_users_on_role_id"
   end
 

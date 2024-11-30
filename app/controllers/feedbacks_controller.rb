@@ -14,13 +14,14 @@ class FeedbacksController < ApplicationController
 
     # Non-presenters can submit feedback
     def create
-      @feedback = @presentation.feedbacks.build(feedback_params)
-      @feedback.user = current_user  # Assuming the current user is submitting feedback
-
+      @feedback = Feedback.new(feedback_params)
+      #@feedback = @presentation.feedbacks.build(feedback_params)
+      # @feedback.user = current_user  # Assuming the current user is submitting feedback
+      @presentation = Presentation.find(@feedback.presentation_id)
       if @feedback.save
         redirect_to @presentation, notice: "Feedback successfully submitted."
       else
-        render "new", alert: "Error submitting feedback."
+        redirect_to new_feedback_presentation_path(@presentation), alert: "Unable to submit feedback."
       end
     end
 
@@ -43,7 +44,8 @@ class FeedbacksController < ApplicationController
     end
 
     def feedback_params
-      params.require(:feedback).permit(:content, :rating, :presenter_id)
+      #params.require(:feedback).permit(:content, :rating, :presenter_id)
+      params.require(:feedback).permit(:presentation_id, :rating, :description)
     end
 
     def authorize_user
