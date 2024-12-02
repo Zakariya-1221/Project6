@@ -10,27 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_25_204723) do
-  create_table "feedbacks", force: :cascade do |t|
+ActiveRecord::Schema[7.2].define(version: 2024_11_26_023003) do
+  create_table "attendances", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "presentation_id", null: false
-    t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "rating"
-    t.index ["presentation_id"], name: "index_feedbacks_on_presentation_id"
-    t.index ["user_id"], name: "index_feedbacks_on_user_id"
+    t.index ["presentation_id"], name: "index_attendances_on_presentation_id"
+    t.index ["user_id"], name: "index_attendances_on_user_id"
+  end
+
+  create_table "feedbacks", force: :cascade do |t|
+    t.integer "userID", null: false
+    t.integer "presentationID", null: false
+    t.integer "feedbackScore"
+    t.string "feedback"
+    t.datetime "submitTime"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "presentations", force: :cascade do |t|
-    t.string "title"
+    t.string "title", null: false
     t.string "description"
+    t.date "date"
+    t.time "time"
+    t.integer "presenterID", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "roles", force: :cascade do |t|
-    t.string "name"
+  create_table "roles", primary_key: "roleID", force: :cascade do |t|
+    t.string "roleName"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -38,13 +49,14 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_25_204723) do
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
+    t.integer "roleID"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "password"
-    t.integer "role_id"
   end
 
-  add_foreign_key "users", "roles"
-  add_foreign_key "feedbacks", "presentations"
-  add_foreign_key "feedbacks", "users"
+  add_foreign_key "attendances", "presentations"
+  add_foreign_key "attendances", "users"
+  add_foreign_key "feedbacks", "presentations", column: "presentationID"
+  add_foreign_key "feedbacks", "users", column: "userID"
+  add_foreign_key "presentations", "users", column: "presenterID"
 end

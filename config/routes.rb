@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   end
 
   root to: redirect('/users/sign_in')
-
   resources :users
   resources :presentations do
     resources :feedbacks

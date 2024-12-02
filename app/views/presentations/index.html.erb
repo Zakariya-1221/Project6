@@ -1,5 +1,14 @@
+<% provide(:title, 'Presentations') %>
 <h1>All Presentations</h1>
-<% @presentations.each do |presentation| %>
-  <h2><%= link_to presentation.title, presentation_path(presentation) %></h2>
-  <p><%= presentation.description %></p>
-<% end %>
+<ul>
+  <% @presentations.each do |presentation| %>
+    <li>
+      <%= link_to presentation.title, presentation_path(presentation) %>
+      <%= presentation.description %>
+      <%= presentation.date %>
+      <%= presentation.time %>
+      <%= presentation.presenter&.name %>
+
+    </li>
+  <% end %>
+</ul>
