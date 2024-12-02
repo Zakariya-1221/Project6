@@ -1,0 +1,12 @@
+<nav>
+    <%= link_to "Home", root_path %>
+    <!--% if current_user && (current_user.role?("teacher") || current_user.role?("ta"))%-->
+        <%= link_to "Admin Dashboard", admin_dashboard_path %>
+    <!--% end %-->
+    <%= link_to "Presentations", presentations_path %>
+    <%= link_to "New Presentation", new_presentation_path %>
+    <%= link_to "Users", users_path %>
+    <%= link_to "New User", new_user_path %>
+    <%= link_to "Login", '#' %>
+    <!--%= link_to "feedback", feedbacks_path %-->
+</nav>
