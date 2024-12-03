@@ -11,10 +11,10 @@ class User < ApplicationRecord
     validates :password, presence: true, on: :create
     
     def admin?
-      role.roleName == 'admin'
+      role.name == 'admin'
     end
     
     def student?
-      role.roleName == 'student'
+      role.name == 'student'
     end
   end
