@@ -1,10 +1,10 @@
-<h1>Login</h1>
+<div class="container">
+  <h1>Login</h1>
 
-<% if flash[:error] %>
-  <div class="error">
-    <%= flash[:error] %>
-  </div>
-<% end %>
+  <% if flash[:error] %>
+      <%= flash[:error] %>
+  <% end %>
+
 
 <%= form_with(url: login_path, local: true) do |f| %>
   <div class="group">
@@ -23,3 +23,4 @@
 <% end %>
 
 <p class="signup">Don't have an account? <%= link_to "Sign up", new_user_path %></p>
+

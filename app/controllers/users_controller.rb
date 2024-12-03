@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.role = Role.find_by(name: 'student') # Set default role to student
+    @user.role = Role.find_by(roleName: 'student') # Set default role to student
     
     if @user.save
       session[:user_id] = @user.id # Automatically log in the new user
