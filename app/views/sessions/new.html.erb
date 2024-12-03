@@ -1,25 +1,25 @@
-<h1>Login</h1>
+<div class="container">
+  <h1>Login</h1>
 
-<% if flash[:error] %>
-  <div class="error">
-    <%= flash[:error] %>
-  </div>
-<% end %>
+  <% if flash[:error] %>
+      <%= flash[:error] %>
+  <% end %>
 
-<%= form_with(url: login_path, local: true) do |f| %>
-  <div>
-    <%= f.label :email %>
-    <%= f.email_field :email %>
-  </div>
+  <%= form_with(url: login_path, local: true, class: 'login-form') do |f| %>
+    <div class="group">
+      <%= f.label :email, class: 'label' %>
+      <%= f.email_field :email, class: 'input' %>
+    </div>
 
-  <div>
-    <%= f.label :password %>
-    <%= f.password_field :password %>
-  </div>
+    <div class="group">
+      <%= f.label :password, class: 'label' %>
+      <%= f.password_field :password, class: 'input'%>
+    </div>
 
-  <div>
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
+    <div class="group">
+      <%= f.submit "Log in", class: 'button' %>
+    </div>
+  <% end %>
 
-<p>Don't have an account? <%= link_to "Sign up", new_user_path %></p>
+  <p class="signup">Don't have an account? <%= link_to "Sign up", new_user_path, class: 'signup' %></p>
+</div>
