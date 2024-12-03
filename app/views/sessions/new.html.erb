@@ -1,0 +1,27 @@
+<!-- app/views/sessions/new.html.erb -->
+
+<div class="container">
+  <h1>Login</h1>
+
+  <% if flash[:error] %>
+      <%= flash[:error] %>
+  <% end %>
+
+  <%= form_with(url: login_path, local: true, class: 'login-form') do |f| %>
+    <div class="group">
+      <%= f.label :email, class: 'label' %>
+      <%= f.email_field :email, class: 'input' %>
+    </div>
+
+    <div class="group">
+      <%= f.label :password, class: 'label' %>
+      <%= f.password_field :password, class: 'input'%>
+    </div>
+
+    <div class="group">
+      <%= f.submit "Log in", class: 'button' %>
+    </div>
+  <% end %>
+
+  <p class="signup">Don't have an account? <%= link_to "Sign up", new_user_path, class: 'signup' %></p>
+</div>

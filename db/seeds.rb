@@ -7,3 +7,25 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+# db/seeds.rb
+# Create roles
+User.destroy_all()
+Role.destroy_all()
+admin_role = Role.create!(name: 'admin')
+student_role = Role.create!(name: 'student')
+
+# Create an admin user
+User.create!(
+  name: 'Admin',
+  email: 'admin.1@osu.edu',
+  password: 'admin123',
+  role: admin_role
+)
+
+# Create a student user
+User.create!(
+  name: 'Student',
+  email: 'student.1@osu.edu',
+  password: 'student123',
+  role: student_role
+)

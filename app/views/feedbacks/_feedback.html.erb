@@ -1,0 +1,14 @@
+<div class="feedback">
+  <p>
+    <strong>From:</strong> <%= feedback.user.name %>
+    <strong>Rating:</strong> <%= feedback.rating %>/5
+  </p>
+  <p><%= feedback.content %></p>
+  
+  <% if current_user == feedback.user || current_user.admin? %>
+    <%= link_to 'Edit', edit_presentation_feedback_path(feedback.presentation, feedback) %>
+    <%= button_to 'Delete', presentation_feedback_path(feedback.presentation, feedback),
+                  method: :delete,
+                  data: { confirm: 'Are you sure?' } %>
+  <% end %>
+</div>

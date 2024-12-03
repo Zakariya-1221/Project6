@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
-  namespace :api do
-    namespace :v1 do
-      resources :users do
-        resources :presentations, only: [:index, :show]
-      end
-    end
+  root 'presentations#index'
+  
+  # Session routes - for login/logout
+  get 'login', to: 'sessions#new'
+  post 'login', to: 'sessions#create'
+  delete 'logout', to: 'sessions#destroy'
+  
+  resources :users
+  resources :presentations do
+    resources :feedbacks
   end
 end
