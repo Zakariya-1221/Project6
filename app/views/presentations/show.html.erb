@@ -27,18 +27,20 @@
     <% end %>
   <% end %>
 </div>
-
+<br>
 <div class="feedback-actions">
   <% if current_user != @presentation.presenter %>
     <%= link_to 'Give Feedback', new_presentation_feedback_path(@presentation), class: 'button' %>
   <% end %>
 </div>
-
+<br>
 <div class="actions">
   <%= link_to 'Back to Presentations', presentations_path %>
+  <br>
   <% if current_user == @presentation.presenter || current_user.admin? %>
     <%= link_to 'Edit Presentation', edit_presentation_path(@presentation) %>
-    <%= button_to 'Delete Presentation', presentation_path(@presentation), 
+    <br>
+    <%= button_to 'Delete Presentation', presentation_path(@presentation),class:'button', 
                   method: :delete,
                   data: { confirm: 'Are you sure?' } %>
   <% end %>

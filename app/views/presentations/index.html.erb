@@ -1,5 +1,5 @@
 <h1>Presentations</h1>
-
+<div class="table-style">
 <table>
   <thead>
     <tr>
@@ -21,19 +21,24 @@
           <td><%= presentation.feedbacks.count %></td>
         <% end %>
         <td>
+          <div class="actions">
           <%= link_to 'View', presentation_path(presentation) %>
+          <br>
           <% if current_user.admin? || presentation.presenter == current_user %>
             <%= link_to 'Edit', edit_presentation_path(presentation) %>
-            <%= button_to 'Delete', presentation_path(presentation), 
+            <%= button_to 'Delete', presentation_path(presentation), class:'button', 
                 method: :delete, 
                 data: { confirm: 'Are you sure?' } %>
           <% end %>
+          </div>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
+</div>
+<div class="actions">
 <% if current_user.admin? %>
   <%= link_to 'New Presentation', new_presentation_path %>
 <% end %>
+</div>

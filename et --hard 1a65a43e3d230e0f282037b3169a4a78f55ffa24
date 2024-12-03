@@ -1,0 +1,84 @@
+[33mcommit f4a805f1dd59038e0d104bed4c9b6aca98bc55b6[m[33m ([m[1;36mHEAD -> [m[1;32mdevelopment[m[33m)[m
+Author: Iram <masood.39@osu.edu>
+Date:   Tue Dec 3 00:26:45 2024 -0500
+
+    my styling
+
+[33mcommit 1a65a43e3d230e0f282037b3169a4a78f55ffa24[m
+Author: Iram <masood.39@osu.edu>
+Date:   Mon Dec 2 22:26:46 2024 -0500
+
+    fixed issues
+
+[33mcommit 49ddfd57da9db533d0e8661ffc41cc4a722d502a[m[33m ([m[1;31morigin/branch1[m[33m)[m
+Author: Zakariya Ahmed <ahmed.990@osu.edu>
+Date:   Mon Dec 2 20:38:47 2024 -0500
+
+    fixed new user bug
+
+[33mcommit ebb47df8529b2ce60d017ae6c7b2a8ddcb8f2f15[m
+Author: Zakariya Ahmed <ahmed.990@osu.edu>
+Date:   Mon Dec 2 20:34:23 2024 -0500
+
+    added edit presentations
+
+[33mcommit 480191436b4b3d138a155eadfd263cedab756ed6[m
+Author: Zakariya Ahmed <ahmed.990@osu.edu>
+Date:   Mon Dec 2 20:30:29 2024 -0500
+
+    student is able to create presentations and view feedback
+
+[33mcommit f1bcf71a7eb70de3038c2b4c101cd0ab64671e30[m
+Author: Zakariya Ahmed <ahmed.990@osu.edu>
+Date:   Mon Dec 2 20:14:25 2024 -0500
+
+    added login and feedback functionality
+
+[33mcommit d8364c9b2aaaf379b6a5f160e260137e9690d1c6[m
+Merge: c43899b df073e4
+Author: Zakariya Ahmed <ahmed.990@osu.edu>
+Date:   Mon Dec 2 14:02:17 2024 -0500
+
+    merged branch2 into branch1
+
+[33mcommit c43899b0ca26b588d725acd2929bf19c7a61e5d7[m
+Author: Zakariya Ahmed <ahmed.990@osu.edu>
+Date:   Mon Dec 2 13:43:18 2024 -0500
+
+    added user roles teacher and student
+
+[33mcommit b304656f14f995deda2b24f02f55db3901e0a891[m[33m ([m[1;32mbranch1[m[33m)[m
+Author: Zakariya Ahmed <ahmed.990@osu.edu>
+Date:   Tue Nov 26 15:07:06 2024 -0500
+
+    branch1 models, controllers
+
+[33mcommit df073e41e94cd856765aa57156945c4720578421[m
+Author: Iram <masood.39@osu.edu>
+Date:   Tue Nov 26 00:55:59 2024 -0500
+
+    minor changes
+
+[33mcommit 5f3f7a2a1c297622b8af66d63dba7e5c1395f373[m
+Author: Iram <masood.39@osu.edu>
+Date:   Tue Nov 26 00:14:16 2024 -0500
+
+    creted tables, associations, presentation and show
+
+[33mcommit b8c412fbe536095e30dfd329b2181301fab61c55[m
+Author: Iram <masood.39@osu.edu>
+Date:   Mon Nov 25 20:38:14 2024 -0500
+
+    tables created
+
+[33mcommit 42015203543ab61091853c18e2cd9b484a524dd2[m
+Author: Iram <masood.39@osu.edu>
+Date:   Mon Nov 25 18:49:52 2024 -0500
+
+    cloned main file
+
+[33mcommit 03d07c8a03e33bceaa664ddae10e50e40d5666ba[m
+Author: Zakariya Ahmed <ahmed.990@osu.edu>
+Date:   Sun Nov 24 13:07:37 2024 -0500
+
+    added base rails files

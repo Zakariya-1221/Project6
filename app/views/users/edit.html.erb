@@ -13,18 +13,20 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.label :name, class:'label' %>
+    <%= form.text_field :name, class:'input' %>
   </div>
-
+<br>
   <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email %>
+    <%= form.label :email, class:'label' %>
+    <%= form.text_field :email, class:'input' %>
   </div>
-
+<br>
   <div class="actions">
-    <%= form.submit "Update User" %>
+    <%= form.submit "Update User", class:'button' %>
   </div>
 <% end %>
-
-<%= link_to 'Back' , users_path %>
+<br>
+<div class="actions">
+  <%= link_to 'Back' , users_path %>
+</div>

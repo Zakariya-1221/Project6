@@ -13,16 +13,18 @@
   <% end %>
 
   <div>
-    <%= f.label :rating, "Rating (1-5)" %>
+    <%= f.label :rating, "Rating (1-5)", class: 'label' %>
     <%= f.number_field :rating, in: 1..5 %>
   </div>
-
+<br><br>
   <div>
-    <%= f.label :content, "Feedback" %>
-    <%= f.text_area :content %>
+    <%= f.label :content, "Feedback", class: 'label' %>
+    <%= f.text_area :content, class:'textbox' %>
   </div>
-
-  <%= f.submit "Submit Feedback" %>
+<br><br>
+  <%= f.submit "Submit Feedback", class: 'button' %>
 <% end %>
-
+<br><br>
+<div class="actions">
 <%= link_to 'Back to Presentation', presentation_path(@presentation) %>
+</div>

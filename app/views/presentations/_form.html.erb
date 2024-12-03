@@ -11,14 +11,15 @@
     <% end %>
   
     <div class="field">
-      <%= f.label :title %>
-      <%= f.text_field :title %>
+      <%= f.label :title, class: 'label' %>
+      <%= f.text_field :title, class: 'textbox' %>
     </div>
-  
+  <br><br>
     <div class="field">
-      <%= f.label :description %>
-      <%= f.text_area :description %>
+      <%= f.label :description, class: 'label' %>
+      <%= f.text_area :description, class: 'textbox' %>
     </div>
-  
-    <%= f.submit class: "button" %>
+  <br><br>
+    <%= f.submit class: "button", class: 'button' %>
   <% end %>
+  <br><br>
