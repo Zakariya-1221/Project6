@@ -1,7 +1,6 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-<<<<<<< HEAD
   user: one
   presentation: one
   content: MyText
@@ -10,17 +9,3 @@ two:
   user: two
   presentation: two
   content: MyText
-=======
-  userID: 1
-  presentationID: 1
-  feedbackScore: 1
-  feedback: MyString
-  submitTime: 2024-11-25 20:26:56
-
-two:
-  userID: 1
-  presentationID: 1
-  feedbackScore: 1
-  feedback: MyString
-  submitTime: 2024-11-25 20:26:56
->>>>>>> branch2

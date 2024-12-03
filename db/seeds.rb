@@ -8,18 +8,22 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 # db/seeds.rb
-
-# Clear existing data
-User.destroy_all
-Role.destroy_all
-
 # Create roles
-teacher_role = Role.create!(name: 'Teacher')
-student_role = Role.create!(name: 'Student')
+admin_role = Role.create!(roleName: 'admin')
+student_role = Role.create!(roleName: 'student')
 
-# Create teacher users
-User.create!(name: 'Baha Amayreh', email: 'amayreh.1@osu.edu', role: teacher_role)
+# Create an admin user
+User.create!(
+  name: 'Admin',
+  email: 'admin.1@osu.edu',
+  password: 'admin123',
+  role: admin_role
+)
 
-# Create student users
-User.create!(name: 'Zakariya Ahmed', email: 'ahmed.990@osu.edu', role: student_role)
-User.create!(name: 'James Smith', email: 'smith.3@osu.edu', role: student_role)
+# Create a student user
+User.create!(
+  name: 'Student',
+  email: 'student.1@osu.edu',
+  password: 'student123',
+  role: student_role
+)

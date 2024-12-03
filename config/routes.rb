@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users
-
-  authenticated :user do
-    root 'dashboard#index', as: :authenticated_root
-  end
-
-  root to: redirect('/users/sign_in')
+  root 'presentations#index'
+  
+  # Session routes - for login/logout
+  get 'login', to: 'sessions#new'
+  post 'login', to: 'sessions#create'
+  delete 'logout', to: 'sessions#destroy'
+  
   resources :users
   resources :presentations do
     resources :feedbacks

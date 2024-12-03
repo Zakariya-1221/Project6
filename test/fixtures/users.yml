@@ -3,15 +3,7 @@
 one:
   name: MyString
   email: MyString
-<<<<<<< HEAD
-=======
-  roleID: 1
->>>>>>> branch2
 
 two:
   name: MyString
   email: MyString
-<<<<<<< HEAD
-=======
-  roleID: 1
->>>>>>> branch2

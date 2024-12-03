@@ -1,25 +1,32 @@
 <h1><%= @presentation.title %></h1>
 <p><%= @presentation.description %></p>
+<p><strong>Presenter:</strong> <%= @presentation.presenter&.name || 'No presenter assigned' %></p>
 
-<h2>Feedback</h2>
-<%= form_with(model: [ @presentation, @presentation.feedbacks.build ], local: true) do |form| %>
-  <div class="field">
-    <%= form.label :content %>
-    <%= form.text_area :content %>
-  </div>
-  <div class="field">
-    <%= form.label :rating %>
-    <%= form.number_field :rating %>
-  </div>
-  <div class="actions">
-    <%= form.submit "Submit Feedback" %>
-  </div>
-<% end %>
+<div class="feedbacks-section">
+  <% if current_user.admin? || @presentation.presenter == current_user %>
+    <h2>All Feedback</h2>
+    <% if @feedbacks.any? %>
+      <% @feedbacks.each do |feedback| %>
+        <%= render 'feedbacks/feedback', feedback: feedback %>
+      <% end %>
+    <% else %>
+      <p>No feedback yet.</p>
+    <% end %>
+  <% end %>
+</div>
 
-<h3>All Feedback</h3>
-<% @presentation.feedbacks.each do |feedback| %>
-  <p><strong>Rating:</strong> <%= feedback.rating %></p>
-  <p><%= feedback.content %></p>
-<% end %>
+<div class="feedback-actions">
+  <% if current_user != @presentation.presenter %>
+    <%= link_to 'Give Feedback', new_presentation_feedback_path(@presentation), class: 'button' %>
+  <% end %>
+</div>
 
-<%= link_to 'Delete', presentation_path(@presentation), data: { "turbo-method": :delete, turbo_confirm: "Are you sure?" } %>
+<div class="actions">
+  <%= link_to 'Back to Presentations', presentations_path %>
+  <% if current_user.admin? || current_user == @presentation.presenter %>
+    <%= link_to 'Edit Presentation', edit_presentation_path(@presentation) %>
+    <%= button_to 'Delete Presentation', presentation_path(@presentation), 
+                  method: :delete,
+                  data: { confirm: 'Are you sure?' } %>
+  <% end %>
+</div>

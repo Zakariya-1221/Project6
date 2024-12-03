@@ -1,12 +1,14 @@
-class Presentation < ApplicationRecord
-  belongs_to :presenter, class_name: "User", foreign_key: "presenter_id"
-  has_many :attendances
-  has_many :users, through: :attendances
+# class Presentation < ApplicationRecord
+#     has_many :feedbacks, dependent: :destroy
+#     accepts_nested_attributes_for :feedbacks
 
-  # has_many :users, foreign_key: 'presenterID'
-  has_many :feedbacks, foreign_key: "presentation_id"
-
-  validates :title, presence: true
-  validates :date, presence: true
-  validates :time, presence: true
-end
+#     validates :title, presence: true
+#     validates :description, presence: true
+# end
+ class Presentation < ApplicationRecord
+    belongs_to :presenter, class_name: 'User', optional: true
+    has_many :feedbacks, dependent: :destroy
+    
+    validates :title, presence: true
+    validates :description, presence: true
+  end

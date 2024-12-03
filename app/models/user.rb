@@ -1,18 +1,20 @@
+# app/models/user.rb
 class User < ApplicationRecord
-  belongs_to :role
-  has_many :attendances, foreign_key: "user_id"
-  # has_many :presentations, through: :attendances
-  has_many :feedbacks, foreign_key: "user_id"
-  has_many :presentations, class_name: "Presentation", foreign_key: "presenter_id"
-    def teacher?
-        role.name == 'teacher'
+    belongs_to :role
+    has_many :feedbacks
+    has_many :presentations, foreign_key: 'presenter_id'
+    
+    has_secure_password
+    
+    validates :email, presence: true, uniqueness: true
+    validates :name, presence: true
+    validates :password, presence: true, on: :create
+    
+    def admin?
+      role.roleName == 'admin'
     end
-
+    
     def student?
-        role.name == 'student'
+      role.roleName == 'student'
     end
-
-  validates :email, presence: true, length: { maximum: 50 },
-    uniqueness: true, format: { with: /\A\w+\.\d+@osu\.edu\Z/i }
-  validates :name, presence: true, length: { maximum: 50 }
-end
+  end

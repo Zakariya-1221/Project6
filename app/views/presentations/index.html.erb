@@ -1,14 +1,39 @@
-<% provide(:title, 'Presentations') %>
-<h1>All Presentations</h1>
-<ul>
-  <% @presentations.each do |presentation| %>
-    <li>
-      <%= link_to presentation.title, presentation_path(presentation) %>
-      <%= presentation.description %>
-      <%= presentation.date %>
-      <%= presentation.time %>
-      <%= presentation.presenter&.name %>
+<h1>Presentations</h1>
 
-    </li>
-  <% end %>
-</ul>
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Presenter</th>
+      <% if current_user.admin? %>
+        <th>Feedback Count</th>
+      <% end %>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @presentations.each do |presentation| %>
+      <tr>
+        <td><%= presentation.title %></td>
+        <td><%= presentation.presenter&.name || 'No presenter assigned' %></td>
+        <% if current_user.admin? %>
+          <td><%= presentation.feedbacks.count %></td>
+        <% end %>
+        <td>
+          <%= link_to 'View', presentation_path(presentation) %>
+          <% if current_user.admin? || presentation.presenter == current_user %>
+            <%= link_to 'Edit', edit_presentation_path(presentation) %>
+            <%= button_to 'Delete', presentation_path(presentation), 
+                method: :delete, 
+                data: { confirm: 'Are you sure?' } %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% if current_user.admin? %>
+  <%= link_to 'New Presentation', new_presentation_path %>
+<% end %>
