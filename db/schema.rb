@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_02_235950) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_03_031451) do
   create_table "feedbacks", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "presentation_id", null: false
@@ -30,8 +30,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_02_235950) do
     t.integer "presenter_id"
   end
 
-  create_table "roles", primary_key: "role_id", force: :cascade do |t|
-    t.string "roleName"
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -39,13 +39,15 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_02_235950) do
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
+    t.integer "role_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "password"
     t.string "password_digest"
-    t.integer "role_id"
+    t.index ["role_id"], name: "index_users_on_role_id"
   end
 
   add_foreign_key "feedbacks", "presentations"
   add_foreign_key "feedbacks", "users"
-  add_foreign_key "users", "roles", primary_key: "role_id"
+  add_foreign_key "users", "roles"
 end

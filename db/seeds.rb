@@ -9,8 +9,10 @@
 #   end
 # db/seeds.rb
 # Create roles
-admin_role = Role.create!(roleName: 'admin')
-student_role = Role.create!(roleName: 'student')
+User.destroy_all()
+Role.destroy_all()
+admin_role = Role.create!(name: 'admin')
+student_role = Role.create!(name: 'student')
 
 # Create an admin user
 User.create!(
