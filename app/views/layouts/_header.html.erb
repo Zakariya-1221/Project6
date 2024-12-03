@@ -2,10 +2,10 @@
     <%= link_to "Home", root_path %>
     <% if logged_in? %>
         <%= link_to "Presentations", presentations_path %>
+        <%= link_to "New Presentation", new_presentation_path %>  <%# Now visible to all logged-in users %>
         <% if current_user.admin? %>
             <%= link_to "Users", users_path %>
             <%= link_to "New User", new_user_path %>
-            <%= link_to "New Presentation", new_presentation_path %>
         <% end %>
         <span>Welcome, <%= current_user.name %> (<%= current_user.role.roleName %>)</span>
         <%= button_to "Logout", logout_path, method: :delete %>

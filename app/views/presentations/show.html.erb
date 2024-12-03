@@ -4,10 +4,23 @@
 
 <div class="feedbacks-section">
   <% if current_user.admin? || @presentation.presenter == current_user %>
-    <h2>All Feedback</h2>
+    <h2>Feedback Received</h2>
     <% if @feedbacks.any? %>
       <% @feedbacks.each do |feedback| %>
-        <%= render 'feedbacks/feedback', feedback: feedback %>
+        <div class="feedback">
+          <p>
+            <strong>From:</strong> <%= feedback.user.name %>
+            <strong>Rating:</strong> <%= feedback.rating %>/5
+          </p>
+          <p><%= feedback.content %></p>
+          
+          <% if current_user.admin? || feedback.user == current_user %>
+            <%= link_to 'Edit', edit_presentation_feedback_path(@presentation, feedback) %>
+            <%= button_to 'Delete', presentation_feedback_path(@presentation, feedback),
+                         method: :delete,
+                         data: { confirm: 'Are you sure?' } %>
+          <% end %>
+        </div>
       <% end %>
     <% else %>
       <p>No feedback yet.</p>
@@ -23,7 +36,7 @@
 
 <div class="actions">
   <%= link_to 'Back to Presentations', presentations_path %>
-  <% if current_user.admin? || current_user == @presentation.presenter %>
+  <% if current_user == @presentation.presenter || current_user.admin? %>
     <%= link_to 'Edit Presentation', edit_presentation_path(@presentation) %>
     <%= button_to 'Delete Presentation', presentation_path(@presentation), 
                   method: :delete,

@@ -5,12 +5,12 @@ class PresentationsController < ApplicationController
 
   def new
     @presentation = Presentation.new
-    @presentation.presenter = current_user  # Set the current user as presenter
+    @presentation.presenter = current_user
   end
 
   def create
     @presentation = Presentation.new(presentation_params)
-    @presentation.presenter = current_user  # Set the current user as presenter
+    @presentation.presenter = current_user
     if @presentation.save
       redirect_to @presentation, notice: "Presentation created!"
     else
@@ -22,16 +22,18 @@ class PresentationsController < ApplicationController
     if current_user.admin?
       @presentations = Presentation.includes(:presenter, :feedbacks).all
     else
-      @presentations = Presentation.all
+      # Show all presentations for regular users
+      @presentations = Presentation.includes(:presenter)
     end
   end
 
   def show
-    @feedbacks = if current_user.admin? || @presentation.presenter == current_user
-                   @presentation.feedbacks.includes(:user)
-                 else
-                   []
-                 end
+    # Allow everyone to see feedbacks, but only admins and presenters see who gave them
+    @feedbacks = @presentation.feedbacks.includes(:user)
+    
+    # For authorization in the view
+    @can_manage = current_user.admin? || @presentation.presenter == current_user
+    @can_give_feedback = current_user != @presentation.presenter
   end
 
   def edit
@@ -64,6 +66,13 @@ class PresentationsController < ApplicationController
     unless current_user.admin? || @presentation.presenter == current_user
       flash[:alert] = "You are not authorized to perform this action"
       redirect_to presentations_path
+    end
+  end
+
+  def require_user
+    unless logged_in?
+      flash[:alert] = "You must be logged in to access this page"
+      redirect_to login_path
     end
   end
 end

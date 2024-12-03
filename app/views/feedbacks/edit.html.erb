@@ -1,0 +1,28 @@
+<h1>Edit Feedback for <%= @presentation.title %></h1>
+
+<%= form_with(model: [@presentation, @feedback], local: true) do |f| %>
+  <% if @feedback.errors.any? %>
+    <div>
+      <h2><%= pluralize(@feedback.errors.count, "error") %> prohibited this feedback from being saved:</h2>
+      <ul>
+        <% @feedback.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :rating, "Rating (1-5)" %>
+    <%= f.number_field :rating, in: 1..5 %>
+  </div>
+
+  <div>
+    <%= f.label :content, "Feedback" %>
+    <%= f.text_area :content %>
+  </div>
+
+  <%= f.submit "Update Feedback" %>
+<% end %>
+
+<%= link_to 'Back to Presentation', presentation_path(@presentation) %>
